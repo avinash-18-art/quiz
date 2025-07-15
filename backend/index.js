@@ -54,6 +54,13 @@ app.post('/submit', async (req, res) => {
   res.json({ message });
 });
 
+app.get('/',(req,res)=>{
+  res.send({
+    activeStatus:true,
+    error:false
+  })
+})
+
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
 });
