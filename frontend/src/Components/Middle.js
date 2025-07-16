@@ -3,8 +3,7 @@ import './Middle.css';
 
 function Middle() {
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [name, setName] = useState('');
-  const [result, setResult] = useState(null); // For popup message
+  const [result, setResult] = useState(null);
 
   const questions = [
     {
@@ -89,6 +88,13 @@ function Middle() {
     },
   ];
 
+  const correctAnswers = [
+    'C', 'B', 'C', 'C', 'B',
+    'B', 'B', 'B', 'B', 'C',
+    'C', 'C', 'C', 'C', 'B',
+    'C', 'C', 'D', 'C', 'C'
+  ];
+
   const handleOptionChange = (questionIndex, value) => {
     setSelectedAnswers((prev) => ({
       ...prev,
@@ -96,58 +102,33 @@ function Middle() {
     }));
   };
 
-  const handleSubmit = async () => {
-    if (!name.trim()) {
-      alert('Please enter your name before submitting.');
-      return;
-    }
-
+  const handleSubmit = () => {
     if (Object.keys(selectedAnswers).length !== questions.length) {
       alert(`Please answer all ${questions.length} questions before submitting.`);
       return;
     }
 
-    const answersArray = questions.map((_, index) => selectedAnswers[index]?.charAt(0));
-    const payload = { name, answers: answersArray };
+    let score = 0;
+    correctAnswers.forEach((correct, index) => {
+      if (selectedAnswers[index]?.charAt(0) === correct) {
+        score += 5;
+      }
+    });
 
-    try {
-      const response = await fetch('http://localhost:5000/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      // 🎉 Show result in frontend
-      setResult({
-        message: data.message,
-        score: data.score,
-      });
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Error submitting answers. Please try again.');
-    }
+    setResult({
+      score,
+      message:
+        score >= 80
+          ? '🎉 Congratulations! You are selected for the next round!'
+          : '😢 Sorry! You did not qualify. Better luck next time!',
+    });
   };
 
   return (
     <div className="background-developer">
       <h2 className="Heading">We Are Hiring for FullStack Developer Role</h2>
       <h4 className="mcqs">MCQs</h4>
-      <p className="paragraph">
-        This is an MCQ-based assessment. Each question carries 5 marks.
-      </p>
-
-      <div className="name-input" style={{ marginBottom: '20px' }}>
-        <label className="paragraph" style={{ fontWeight: 'bold' }}>Enter Your Name:</label><br />
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your Full Name"
-          style={{ padding: '8px', width: '300px' }}
-        />
-      </div>
+      <p className="paragraph">This is an MCQ-based assessment. Each question carries 5 marks. Total: 100</p>
 
       {questions.map((q, index) => (
         <div key={index} className="mcq-question" style={{ marginBottom: '20px' }}>
@@ -174,28 +155,15 @@ function Middle() {
 
       <button className="button" onClick={handleSubmit}>Submit</button>
 
-      
-{result && (
-  <div className="popup">
-    <div className="popup-content">
-      {parseInt(result.score) >= 70 ? ( // ✅ Ensure numeric comparison
-        <>
-          
-          <p>{result.message || '🎉 Congratulations You are selected for the next round!'}</p>
-        </>
-      ) : (
-        <>
-          
-          <p>{result.message || '😢 Sorry You did not qualify. Better luck next time!'}</p>
-        </>
+      {result && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>{result.message}</p>
+            <p>Your Score: {result.score} / 100</p>
+            <button onClick={() => setResult(null)} className="close-btn">Close</button>
+          </div>
+        </div>
       )}
-      <p>Your Score: <strong>{result.score} / 100</strong></p>
-      <button onClick={() => setResult(null)} className="close-btn">Close</button>
-    </div>
-  </div>
-)}
-
-
     </div>
   );
 }
