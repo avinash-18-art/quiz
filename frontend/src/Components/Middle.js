@@ -119,7 +119,7 @@ function Middle() {
       score,
       message:
         score >= 80
-          ? '🎉 Congratulations! You are selected for the next round!'
+          ? "🎉 Congratulations! You have been selected for the next round. Please come for the interview!"
           : '😢 Sorry! You did not qualify. Better luck next time!',
     });
   };
