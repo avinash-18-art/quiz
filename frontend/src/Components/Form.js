@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Form.css';
 
 function Form() {
@@ -98,7 +99,7 @@ function Form() {
         />
         <Container>
           <div className="d-flex ms-auto align-items-center">
-            <Nav.Link href="#home" className="me-3 text-white">Home</Nav.Link>
+            <Link to="/Frontend"><Nav.Link href="#home" className="me-3 text-white">Home</Nav.Link></Link>
             <Nav>
               <Nav.Link href="#about">About</Nav.Link>
               <Nav.Link href="#services">Service</Nav.Link>
