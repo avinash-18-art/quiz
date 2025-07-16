@@ -19,7 +19,8 @@ function Frontend() {
             <Nav.Link href="#about">About</Nav.Link>
             <Nav.Link href="#services">Service</Nav.Link>
             <Nav.Link  href="#clients">Our Client</Nav.Link>
-            <Link to="/Disk"><Nav.Link className="career" href="#career">Career</Nav.Link></Link>
+            <Nav.Link className="career" href="#career">Career</Nav.Link>
+            <Link to="/Disk"><Nav.Link className="career" href="#career">Assessment</Nav.Link></Link>
             <Nav.Link href="#contact">Contact</Nav.Link>
           </Nav>
         </div>
