@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Middle from './Components/Middle';
 import Form from './Components/Form';
-import Disk from './Components/Disk';
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -29,10 +29,7 @@ const router = createBrowserRouter([
     element: <Form/>
   },
 
-    {
-    path: "/Disk",
-    element: <Disk/>
-  },
+  
 ]);
 
 

@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
 
-import Frontend from './Components/Frontend';
+
+import Form from './Components/Form';
 
 
 
 function App() {
   return (
     <div>
-       <Frontend/>
+    <Form/>
        
       
      

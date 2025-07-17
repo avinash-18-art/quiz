@@ -110,7 +110,8 @@ function Form() {
           </div>
         </Container>
       </Navbar>
-
+       
+      <div className='background-color'> 
       <div className="form-container">
         <form className="form" onSubmit={handleSubmit}>
           <h2 className="form-title">Register Now</h2>
@@ -145,6 +146,7 @@ function Form() {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
